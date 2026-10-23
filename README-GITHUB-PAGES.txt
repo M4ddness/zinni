@@ -1,32 +1,29 @@
-ZINNI — GITHUB PAGES DEPLOYMENT
+ZINNI — GITHUB PAGES UPDATE / CACHE FIX
 
-FILES
-Upload the files in this folder to the ROOT of your GitHub repository:
-- index.html (the homepage)
-- manifest.webmanifest (PWA install metadata)
-- icon.svg (app icon)
-- sw.js (offline service worker)
-- .nojekyll (tells GitHub Pages not to run Jekyll)
+IMPORTANT: Upload BOTH index.html and sw.js from this package. The updated service worker uses a new cache version (zinni-pwa-v3), removes old Zinni caches, claims open tabs, and checks the network first for page navigations so GitHub Pages updates are not hidden by stale cached HTML.
 
-PUBLISH
-1. Sign in at https://github.com
-2. Click + (top right) > New repository.
-3. Name it zinni (or another name you like). For a GitHub Free account, choose Public.
-4. Create the repository.
-5. Click Add file > Upload files.
-6. Unzip this package on your computer, then upload the FILES listed above from inside the folder. Do not upload the ZIP itself. Ensure index.html is at the repository root, not inside another folder.
-7. Click Commit changes.
-8. Open the repository's Settings > Pages.
-9. Under Build and deployment, choose Deploy from a branch.
-10. Choose branch main and folder /(root), then Save.
-11. Wait for deployment. Return to Settings > Pages and click Visit site.
+UPDATE AN EXISTING GITHUB PAGES SITE
+1. Download and unzip this package.
+2. Open your existing Zinni repository on GitHub.
+3. At the repository root, choose Add file > Upload files.
+4. Upload the NEW index.html and NEW sw.js from this folder. If GitHub asks, confirm that you want to replace the existing files.
+5. Click Commit changes.
+6. Wait for GitHub Pages to finish deploying (usually a minute or two). Check repository Settings > Pages for deployment status.
+7. Open your site in a normal browser tab, then do a hard refresh:
+   - Chrome/Edge on Windows: Ctrl + Shift + R
+   - Chrome/Edge on Mac: Cmd + Shift + R
+   - Safari on Mac: Option + Cmd + R (or clear website data if needed)
+8. If the installed app still shows the old version, fully close the installed Zinni window, open the website URL in the browser, and refresh it once. Reopen Zinni.
 
-The address is usually https://YOUR-USERNAME.github.io/zinni/ (replace YOUR-USERNAME with your GitHub username; if you chose another repository name, use that name instead).
+IF IT STILL SHOWS THE OLD VERSION (Chrome / Edge)
+1. Open the Zinni website in the browser.
+2. Open Developer Tools (right-click the page > Inspect).
+3. Go to Application > Service Workers, click Unregister for the Zinni service worker.
+4. Go to Application > Storage and choose Clear site data (this can remove local browser-stored Zinni data, so export a backup first if you have tasks you need to keep).
+5. Reload the site. The new service worker should register again.
 
-INSTALL
-Open the published HTTPS website in Chrome or Edge, open Zinni's menu, and use Install Zinni as an app if available. You can also use the browser's install icon/menu. On iPhone/iPad Safari, use Share > Add to Home Screen.
+DATA WARNING
+Zinni task data is stored in local browser storage, not in the service worker cache. A normal hard refresh should preserve it. Clearing all site data may delete it; export a backup from Settings first.
 
-NOTES
-- GitHub Pages sites are public. Do not store secrets in this repository.
-- The app saves planner data in local storage on that device/browser. It does not sync between devices. Export a backup from the app before clearing browser data.
-- If you update the files later, upload the updated files and commit the changes. GitHub Pages may take a few minutes to publish.
+NEW INSTALLS
+The app remains a static GitHub Pages site and can be installed through a supported browser when served over HTTPS. The service worker supports offline use of cached assets, while online page navigation checks for newer HTML first.
