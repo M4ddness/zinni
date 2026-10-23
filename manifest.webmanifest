@@ -1,0 +1,20 @@
+{
+  "id": "./",
+  "name": "Zinni \u2014 Your day, at your pace",
+  "short_name": "Zinni",
+  "description": "A calm, adaptive personal planner.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f7f5f0",
+  "theme_color": "#61775e",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
